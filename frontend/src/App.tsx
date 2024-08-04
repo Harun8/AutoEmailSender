@@ -6,17 +6,26 @@ import EmailContainer from "./comp/EmailContainer";
 
 function App() {
   return (
-    <>
-      <div className="grid h-lvh grid-cols-2 gap-12">
-        {/* Text here */}
-        <div className="">yo</div>
+    <body className="min-h-screen w-full bg-sky-100	 ">
+      <>
+        <div className="grid h-lvh grid-cols-2 gap-12 content-center">
+          {/* Text here */}
+          <div className="flex justify-center">
+            <h2 className="text-2xl font-bold text-sky-800">
+              Never forget to send an email again
+            </h2>
+            <div>
+              <p className="text-md font-semibold ">to</p>
+            </div>
+          </div>
 
-        <div className="w-full ">
-          {/* Email component here */}
-          <EmailContainer></EmailContainer>
+          <div className="w-full  ">
+            {/* Email component here */}
+            <EmailContainer></EmailContainer>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </body>
   );
 }
 
