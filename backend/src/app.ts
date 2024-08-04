@@ -5,7 +5,7 @@ const app = express();
 const port: number = 3000;
 
 import sgMail from "@sendgrid/mail";
-sgMail.setApiKey();
+// sgMail.setApiKey(); // put api key here
 
 app.listen(port, () => {
   console.log("Server is running on portttt ", port);

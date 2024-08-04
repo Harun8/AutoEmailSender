@@ -3,6 +3,10 @@ import { MailService } from "@sendgrid/mail";
 
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// mailTemplate here
+
+// email sending should not be here
 export const sendEmail = async (req: Request, res: Response) => {
   const msg = {
     to: "harunabdi8@gmail.com", // Change to your recipient
