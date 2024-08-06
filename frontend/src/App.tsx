@@ -1,41 +1,41 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
-import EmailContainer from "./comp/EmailContainer";
-import Nav from "./comp/Nav";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Login from "./pages/login";
+import Signin from "./pages/SignUp";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<HomePage></HomePage>}></Route>
+      <Route path="/login" element={<Login></Login>}></Route>
+      <Route path="/signin" element={<Signin></Signin>}></Route>
+      {/*
+
+
+      <Route path="/blog/:blogId" element={<Blog></Blog>}></Route>
+
+     
+      <Route path="create" element={<CreateBlogPost />}></Route>
+       */}
+    </Route>
+  )
+);
 
 function App() {
   return (
-    <body className="min-h-screen w-full bg-sky-100">
-      <Nav></Nav>
-      <>
-        <div className="grid h-lvh grid-cols-2 gap-12 content-center">
-          {/* Text here */}
-          <div className="flex flex-col items-center ">
-            <h2 className="text-2xl font-bold text-sky-800">
-              Never forget to send an email again
-            </h2>
-            <div className="flex justfiy-center">
-              <p className="text-md font-semibold text-gray-700 hover:text-black tracking-wide	mx-24 mt-12">
-                Craft personalized emails for any event and schedule them to be
-                sent at just the right moment—whether it's a one-time message or
-                a recurring annual greeting.{" "}
-                <span className=" text-md font-semibold text-orange-700 hover:text-orange-900 tracking-wide">
-                  {" "}
-                  You strategize, we execute.
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div className="w-full">
-            {/* Email component here */}
-            <EmailContainer></EmailContainer>
-          </div>
-        </div>
-      </>
-    </body>
+    <>
+      <div className="App"></div>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
