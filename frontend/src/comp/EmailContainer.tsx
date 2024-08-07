@@ -5,7 +5,6 @@ const EmailContainer = () => {
   const [theme, setTheme] = useState<string>("blue");
 
   const changeTheme = (color: string) => {
-    console.log(color); // Log the new theme color
     setTheme(color);
   };
 
@@ -21,17 +20,20 @@ const EmailContainer = () => {
         <div className="font-bold text-sm mb-2 flex justify-center space-x-4">
           <button
             onMouseOver={() => changeTheme("pink")}
-            className=" px-6 py-2  bg-pink-600 hover:bg-pink-900 text-pink-200  rounded-lg">
+            className=" px-6 py-2  bg-pink-600 hover:bg-pink-900 text-pink-200  rounded-lg"
+          >
             Rose
           </button>
           <button
             onMouseOver={() => changeTheme("green")}
-            className="px-6 py-2 bg-green-600 hover:bg-green-900 text-green-200 rounded-lg">
+            className="px-6 py-2 bg-green-600 hover:bg-green-900 text-green-200 rounded-lg"
+          >
             Mint
           </button>
           <button
             onMouseOver={() => changeTheme("blue")}
-            className="px-6 py-2  bg-blue-600 hover:bg-blue-900 text-blue-200 rounded-lg">
+            className="px-6 py-2  bg-blue-600 hover:bg-blue-900 text-blue-200 rounded-lg"
+          >
             Sky
           </button>
         </div>
@@ -54,7 +56,8 @@ const EmailContainer = () => {
             ]}
             speed={50}
             style={{ fontSize: "1em" }}
-            repeat={Infinity}></TypeAnimation>
+            repeat={Infinity}
+          ></TypeAnimation>
         </div>
       </div>
       <div className="px-6 pt-4 pb-2"></div>

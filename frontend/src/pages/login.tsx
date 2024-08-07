@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import Forms, { FormValues } from "../comp/Forms";
+import axios from "axios";
 
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const login = async (values: FormValues) => {
+    // await axios.post("/", {
+    //   values,
+    // });
+    console.log(values);
     setIsSubmitting(true);
 
     setIsSubmitting(false);
@@ -22,7 +27,8 @@ const Login = () => {
               onSubmit={login}
               link="/signin"
               title="Login"
-              redirect="Don't have an account? Sign up?"></Forms>
+              redirect="Don't have an account? Sign up?"
+            ></Forms>
           </div>
         </div>
         <div className="text-slate-900 hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">
