@@ -6,7 +6,15 @@ const app = express();
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 const port: number = 3000;
 
+// routes
+
+import AuthRoute from "./route/AuthRoute";
+
 // sgMail.setApiKey(); // put api key here
+
+app.use(express.json());
+
+app.use("/api/v1", AuthRoute);
 
 app.listen(port, () => {
   console.log("Server is running on portttt ", port);
