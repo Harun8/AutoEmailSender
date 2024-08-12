@@ -1,5 +1,9 @@
 import express, { Response, Request } from "express";
-import { hashPassword, signToken } from "../middleware/authMiddleware";
+import {
+  hashPassword,
+  signToken,
+  verifyPassword,
+} from "../middleware/authMiddleware";
 import * as schema from "../db/schema";
 import { eq, lt, gte, ne } from "drizzle-orm";
 
@@ -14,16 +18,37 @@ type credentials = {
 const db = drizzle(client, { schema });
 
 export const login = async (req: Request, res: Response) => {
-  let cookie = req.cookies["jwt"];
+  let { email, password } = req.body.values;
 
-  console.log(cookie);
+  let users = await db
+    .select()
+    .from(schema.users)
+    .where(eq(schema.users.email, email));
+
+  // no user return early
+  if (users.length === 0) {
+    return res.status(404).json({ err: "Invalid user logins" });
+  }
+
+  // access the first user
+  let user = users[0];
+
+  // Ensure the provided password is not null
+  if (!user.password) {
+    return res.status(400).json({ err: "Password is required" });
+  }
+
+  let isPasswordValid = await verifyPassword(password, user.password);
+
+  if (isPasswordValid) {
+    return res.status(200).json({ err: "Welcome back" });
+  }
+  return res.status(404).json({ err: "Invalid user logins" });
 };
 
 export const signup = async (req: Request, res: Response) => {
   let credentials: credentials = req.body.values;
-  console.log(req.body.values);
   let { email, password, username } = credentials;
-  console.log("email and password", email, password);
 
   // check if user already exist return early if not
 

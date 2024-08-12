@@ -34,3 +34,15 @@ export const hashPassword = async (plainPassword: string) => {
     console.log("error", error);
   }
 };
+
+export const verifyPassword = async (
+  plainPassword: string,
+  hashedPassword: string
+) => {
+  try {
+    let isPasswordValid = await bcrypt.compare(plainPassword, hashedPassword);
+    return isPasswordValid;
+  } catch (error) {
+    console.error("error", error);
+  }
+};
