@@ -6,7 +6,7 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const login = async (values: FormValues) => {
-    let { data } = await axios.post("http://localhost:3000/api/v1/login", {
+    await axios.post("http://localhost:3000/api/v1/login", {
       values,
     });
 

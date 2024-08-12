@@ -57,8 +57,6 @@ export const signup = async (req: Request, res: Response) => {
     .from(schema.users)
     .where(eq(schema.users.email, email));
 
-  console.log("does user exist", userExist);
-
   if (userExist.length > 0)
     return res.status(404).json({ err: "User already exist, log in instead" });
 
@@ -71,7 +69,6 @@ export const signup = async (req: Request, res: Response) => {
       .insert(schema.users)
       .values({ userName: username, email: email, password: hashedPassword })
       .returning();
-    console.log("User inserted:", user);
     let jwtToken = await signToken(user);
 
     res.cookie("jwt", jwtToken, {
