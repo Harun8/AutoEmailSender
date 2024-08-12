@@ -12,7 +12,12 @@ type credentials = {
   username: string;
 };
 const db = drizzle(client, { schema });
-export const login = async (req: Request, res: Response) => {};
+
+export const login = async (req: Request, res: Response) => {
+  let cookie = req.cookies["jwt"];
+
+  console.log(cookie);
+};
 
 export const signup = async (req: Request, res: Response) => {
   let credentials: credentials = req.body.values;
@@ -43,6 +48,12 @@ export const signup = async (req: Request, res: Response) => {
       .returning();
     console.log("User inserted:", user);
     let jwtToken = await signToken(user);
+
+    res.cookie("jwt", jwtToken, {
+      httpOnly: true, // Prevents JavaScript access to the cookie
+      secure: process.env.NODE_ENV === "production", // Use Secure in production (HTTPS only)
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Allows cross-origin in production, lax otherwise
+    });
     return res.status(200).json({ jwtToken });
   } catch (error) {
     return res.status(404).json({ err: "Error saving user" });

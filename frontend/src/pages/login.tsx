@@ -6,9 +6,10 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const login = async (values: FormValues) => {
-    // await axios.post("/", {
-    //   values,
-    // });
+    let { data } = await axios.post("http://localhost:3000/api/v1/login", {
+      values,
+    });
+
     console.log(values);
     setIsSubmitting(true);
 

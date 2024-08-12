@@ -5,6 +5,7 @@ import express, { Request, Response } from "express";
 const app = express();
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 // routes
 import AuthRoute from "./route/AuthRoute";
 
@@ -12,6 +13,8 @@ const port: number = 3000;
 // sgMail.setApiKey(); // put api key here
 
 app.use(cors());
+app.use(cookieParser());
+
 app.use(express.json());
 
 app.use("/api/v1", AuthRoute);
