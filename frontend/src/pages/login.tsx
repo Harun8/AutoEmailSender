@@ -25,10 +25,10 @@ const Login = () => {
               isSubmitting={isSubmitting}
               showPassword={true}
               onSubmit={login}
+              showName={false}
               link="/signin"
               title="Login"
-              redirect="Don't have an account? Sign up?"
-            ></Forms>
+              redirect="Don't have an account? Sign up?"></Forms>
           </div>
         </div>
         <div className="text-slate-900 hidden md:flex md:justify-center md:items-center md:p-12 md:bg-blue-200 md:dark:bg-blue-900 ">

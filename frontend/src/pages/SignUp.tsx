@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import Forms, { FormValues } from "../comp/Forms";
+import axios from "axios";
+import { Cookies } from "react-cookie";
 
 const Signin = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
+  const cookies: Cookies = new Cookies();
   const Signin = async (values: FormValues) => {
+    try {
+      let { data } = await axios.post("http://localhost:3000/api/v1/signup", {
+        values,
+      });
+
+      let { jwtToken } = data;
+      console.log(jwtToken);
+      cookies.set("jwt", jwtToken, { path: "/" });
+    } catch (error) {
+      console.log(error);
+    }
+
     setIsSubmitting(true);
 
     setIsSubmitting(false);
@@ -19,6 +33,7 @@ const Signin = () => {
             <Forms
               isSubmitting={isSubmitting}
               showPassword={true}
+              showName={true}
               onSubmit={Signin}
               link="/login"
               title="Sign Up"

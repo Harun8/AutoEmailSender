@@ -6,6 +6,7 @@ import * as Yup from "yup";
 export type FormValues = {
   email: string;
   password: string;
+  username: string;
 };
 export type Credentials = {
   title: string;
@@ -13,6 +14,7 @@ export type Credentials = {
   isSubmitting: boolean;
   link: string;
   redirect: string;
+  showName: boolean;
   // email: string;
   // password: string;
   onSubmit: (values: FormValues) => void;
@@ -38,7 +40,7 @@ const Forms = (props: Credentials) => {
         </Link>
       </div>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", username: "" }}
         validationSchema={SignupSchema}
         onSubmit={(values) => props.onSubmit(values)}>
         {({ errors, touched }) => (
@@ -51,6 +53,23 @@ const Forms = (props: Credentials) => {
             <h1 className="dark:text-white text-gray-700 flex justify-center text-3xl font-bold 		">
               {props.title}
             </h1>
+
+            {props.showName && (
+              <>
+                <label
+                  className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="username">
+                  Username
+                </label>
+                <Field
+                  className=" autofill:bg-gray-900 bg-slate-200 dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Username"
+                />
+              </>
+            )}
 
             <label
               className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"

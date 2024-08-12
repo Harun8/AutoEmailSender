@@ -4,14 +4,14 @@ import { client } from "./db/db";
 import express, { Request, Response } from "express";
 const app = express();
 import { migrate } from "drizzle-orm/node-postgres/migrator";
-const port: number = 3000;
-
+import cors from "cors";
 // routes
-
 import AuthRoute from "./route/AuthRoute";
 
+const port: number = 3000;
 // sgMail.setApiKey(); // put api key here
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1", AuthRoute);
@@ -30,7 +30,7 @@ const dbConnection = async () => {
   } catch (error) {
     console.error("Database connection or migration failed:", error);
   } finally {
-    await client.end(); // Ensure the client is properly closed
+    // await client.end(); // Ensure the client is properly closed
   }
 };
 

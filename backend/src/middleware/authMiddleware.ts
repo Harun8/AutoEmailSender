@@ -24,7 +24,7 @@ export const verifyToken = (token: string) => {
   return decode;
 };
 
-const hashPassword = async (plainPassword: string) => {
+export const hashPassword = async (plainPassword: string) => {
   let saltRounds: number = 10;
   try {
     let hashedPassword = await bcrypt.hash(plainPassword, saltRounds);

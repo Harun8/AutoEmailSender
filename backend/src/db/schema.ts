@@ -1,24 +1,15 @@
-import {
-  index,
-  int,
-  mysqlTable,
-  bigint,
-  varchar,
-} from "drizzle-orm/mysql-core";
-export const users = mysqlTable(
-  "users",
-  {
-    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    userName: varchar("userName", { length: 256 }),
-    email: varchar("email", { length: 256 }),
-    password: varchar("password", { length: 256 }),
-  },
-  (users) => ({
-    nameIdx: index("name_idx").on(users.userName),
-  })
-);
+import { serial, text, pgTable, pgSchema } from "drizzle-orm/pg-core";
 
-export const EmailTemplates = mysqlTable("emailTemplates", {
-  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-  recipient: varchar("recipient", { length: 256 }),
+export const mySchema = pgSchema("my_schema");
+
+export const users = mySchema.table("users", {
+  id: serial("id").primaryKey(),
+  userName: text("userName"),
+  email: text("email"),
+  password: text("password"),
+});
+
+export const EmailTemplates = mySchema.table("emailTemplates", {
+  id: serial("id").primaryKey(),
+  recipient: text("recipient"),
 });
