@@ -1,14 +1,22 @@
 import { useState } from "react";
 import Forms, { FormValues } from "../comp/Forms";
 import axios from "axios";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const navigate: NavigateFunction = useNavigate();
 
   const login = async (values: FormValues) => {
-    await axios.post("http://localhost:3000/api/v1/login", {
-      values,
-    });
+    try {
+      await axios.post("http://localhost:3000/api/v1/login", {
+        values,
+      });
+
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.log("error logging in", error);
+    }
 
     console.log(values);
     setIsSubmitting(true);

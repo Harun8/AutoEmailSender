@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 dotenv.config();
@@ -19,8 +19,9 @@ export const verifyToken = (token: string) => {
   if (!secretKey) {
     throw new Error("No secret key");
   }
-  let decode = jwt.verify(token, secretKey);
-
+  let decode = jwt.verify(token, secretKey) as JwtPayload & {
+    data: { id: number; userName: string; email: string; password: string }[];
+  };
   return decode;
 };
 

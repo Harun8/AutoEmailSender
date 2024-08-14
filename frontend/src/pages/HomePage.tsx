@@ -1,11 +1,32 @@
 // import "./App.css";
+import { useEffect, useState } from "react";
 import EmailContainer from "../comp/EmailContainer";
 import Nav from "../comp/Nav";
+import axios from "axios";
 
 function HomePage() {
+  const [name, setName] = useState("");
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        let { data } = await axios.get("http://localhost:3000/api/v1/getUser", {
+          withCredentials: true,
+        });
+
+        console.log(data);
+        let username: string = data.username;
+
+        setName(username);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    getUser();
+  }, []);
   return (
     <body className="min-h-screen w-full bg-sky-100">
-      <Nav></Nav>
+      <Nav username={name}></Nav>
       <>
         <div className="grid h-lvh grid-cols-2 gap-12 content-center">
           {/* Text here */}

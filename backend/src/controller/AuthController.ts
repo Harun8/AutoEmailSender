@@ -3,12 +3,14 @@ import {
   hashPassword,
   signToken,
   verifyPassword,
+  verifyToken,
 } from "../middleware/authMiddleware";
 import * as schema from "../db/schema";
 import { eq, lt, gte, ne } from "drizzle-orm";
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { client } from "../db/db";
+import { JwtPayload } from "jsonwebtoken";
 
 type credentials = {
   email: string;
@@ -82,4 +84,18 @@ export const signup = async (req: Request, res: Response) => {
     console.error("Error inserting user:", error);
   }
   // sign the token with the user object, aka email, id, hashedpassword
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  let jwtToken = req.headers.cookie?.substring(4, req.headers.cookie.length);
+
+  if (!jwtToken) {
+    return res.status(404).json({ err: "Invalid user" });
+  }
+
+  let token: string | JwtPayload = verifyToken(jwtToken);
+
+  let username: string = token?.data[0].userName;
+
+  return res.status(200).json({ username });
 };

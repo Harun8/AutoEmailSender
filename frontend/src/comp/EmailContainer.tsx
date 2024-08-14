@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 
@@ -6,6 +7,17 @@ const EmailContainer = () => {
 
   const changeTheme = (color: string) => {
     setTheme(color);
+  };
+
+  // test remember to delete
+  const cookieCheck = async () => {
+    try {
+      await axios.get("http://localhost:3000/api/v1/sendMail", {
+        withCredentials: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const themeColorClass =
@@ -18,6 +30,11 @@ const EmailContainer = () => {
     <div className="max-w-2xl rounded-xl overflow-hidden shadow-2xl">
       <div className="px-6 py-4">
         <div className="font-bold text-sm mb-2 flex justify-center space-x-4">
+          <button
+            onClick={() => cookieCheck()}
+            className=" px-6 py-2  bg-black  text-white shadow-lg  rounded-lg">
+            CookieTest
+          </button>
           <button
             onMouseOver={() => changeTheme("pink")}
             className=" px-6 py-2  bg-slate-100 hover:bg-slate-400 text-pink-900 shadow-lg  rounded-lg">

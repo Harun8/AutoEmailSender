@@ -2,6 +2,6 @@ import { sendEmail } from "../controller/MailController";
 import express from "express";
 const router = express.Router();
 
-router.route("/").get(sendEmail);
+router.route("/sendMail").get(sendEmail);
 
-module.exports = router;
+export default router;

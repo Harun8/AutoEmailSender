@@ -8,16 +8,23 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 // routes
 import AuthRoute from "./route/AuthRoute";
+import MailRoute from "./route/MailRoute";
 
 const port: number = 3000;
 // sgMail.setApiKey(); // put api key here
+const corsOptions = {
+  origin: "http://localhost:5173", // Specify the allowed origin
+  credentials: true, // Allow credentials (cookies, etc.) to be sent
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 app.use(cookieParser());
 
 app.use(express.json());
 
 app.use("/api/v1", AuthRoute);
+app.use("/api/v1", MailRoute);
 
 app.listen(port, () => {
   console.log("Server is running on portttt ", port);
