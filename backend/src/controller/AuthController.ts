@@ -40,10 +40,12 @@ export const login = async (req: Request, res: Response) => {
     return res.status(400).json({ err: "Password is required" });
   }
 
+  let jwtToken = await signToken(user);
+
   let isPasswordValid = await verifyPassword(password, user.password);
 
   if (isPasswordValid) {
-    return res.status(200).json({ err: "Welcome back" });
+    return res.status(200).json({ jwtToken });
   }
   return res.status(404).json({ err: "Invalid user logins" });
 };
@@ -88,14 +90,17 @@ export const signup = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   let jwtToken = req.headers.cookie?.substring(4, req.headers.cookie.length);
-
+  // console.log(req.headers.cookie);
   if (!jwtToken) {
     return res.status(404).json({ err: "Invalid user" });
   }
 
   let token: string | JwtPayload = verifyToken(jwtToken);
 
-  let username: string = token?.data[0].userName;
+  console.log(token.data.userName);
+
+  // let username: string = token?.data[0].userName;
+  let username: string = token?.data.userName;
 
   return res.status(200).json({ username });
 };

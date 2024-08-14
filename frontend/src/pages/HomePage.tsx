@@ -5,16 +5,27 @@ import Nav from "../comp/Nav";
 import axios from "axios";
 
 function HomePage() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   useEffect(() => {
     const getUser = async () => {
       try {
-        let { data } = await axios.get("http://localhost:3000/api/v1/getUser", {
+        let response = await axios.get("http://localhost:3000/api/v1/getUser", {
           withCredentials: true,
         });
 
+        console.log(response.status);
+
+        if (response.status === 404) {
+          setLoggedIn(false);
+          return;
+        }
+
+        let { data } = response;
+
         console.log(data);
         let username: string = data.username;
+        setLoggedIn(true);
 
         setName(username);
       } catch (error) {
@@ -26,7 +37,7 @@ function HomePage() {
   }, []);
   return (
     <body className="min-h-screen w-full bg-sky-100">
-      <Nav username={name}></Nav>
+      <Nav username={name} loggedIn={loggedIn}></Nav>
       <>
         <div className="grid h-lvh grid-cols-2 gap-12 content-center">
           {/* Text here */}

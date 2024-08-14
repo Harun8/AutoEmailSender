@@ -2,16 +2,20 @@ import { useState } from "react";
 import Forms, { FormValues } from "../comp/Forms";
 import axios from "axios";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const navigate: NavigateFunction = useNavigate();
+  const cookies: Cookies = new Cookies();
 
   const login = async (values: FormValues) => {
     try {
-      await axios.post("http://localhost:3000/api/v1/login", {
+      let { data } = await axios.post("http://localhost:3000/api/v1/login", {
         values,
       });
+      let { jwtToken } = data;
+      cookies.set("jwt", jwtToken, { path: "/" });
 
       navigate("/", { replace: true });
     } catch (error) {
