@@ -4,6 +4,7 @@ import EmailContainer from "../comp/EmailContainer";
 import Nav from "../comp/Nav";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import ViewIsland from "../comp/ViewIsland";
 
 function HomePage() {
   const [name, setName] = useState<string>("");
@@ -70,7 +71,8 @@ function HomePage() {
 
           <div className="w-full">
             {/* Email component here */}
-            <EmailContainer></EmailContainer>
+            {/* <EmailContainer></EmailContainer> */}
+            <ViewIsland></ViewIsland>
           </div>
         </div>
       </>
