@@ -70,9 +70,7 @@ function HomePage() {
           </div>
 
           <div className="w-full">
-            {/* Email component here */}
-            {/* <EmailContainer></EmailContainer> */}
-            <ViewIsland></ViewIsland>
+            <ViewIsland loggedIn={loggedIn}></ViewIsland>
           </div>
         </div>
       </>
