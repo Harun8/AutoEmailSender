@@ -90,14 +90,11 @@ export const signup = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   let jwtToken = req.headers.cookie?.substring(4, req.headers.cookie.length);
-  // console.log(req.headers.cookie);
   if (!jwtToken) {
     return res.status(404).json({ err: "Invalid user" });
   }
 
   let token: string | JwtPayload = verifyToken(jwtToken);
-
-  console.log(token.data.userName);
 
   // let username: string = token?.data[0].userName;
   let username: string = token?.data.userName;

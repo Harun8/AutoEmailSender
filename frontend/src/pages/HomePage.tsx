@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import EmailContainer from "../comp/EmailContainer";
 import Nav from "../comp/Nav";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 function HomePage() {
   const [name, setName] = useState<string>("");
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  const cookies: Cookies = new Cookies();
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -35,9 +39,15 @@ function HomePage() {
 
     getUser();
   }, []);
+
+  const logout = async () => {
+    cookies.remove("jwt");
+    setName("");
+    location.reload();
+  };
   return (
     <body className="min-h-screen w-full bg-sky-100">
-      <Nav username={name} loggedIn={loggedIn}></Nav>
+      <Nav username={name} loggedIn={loggedIn} logout={logout}></Nav>
       <>
         <div className="grid h-lvh grid-cols-2 gap-12 content-center">
           {/* Text here */}
