@@ -1,8 +1,6 @@
 import { Formik, Form, Field } from "formik";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
-// import "@/public/styles/form.css";
-
+import TextEditor from "./TextEditor";
 export type FormValues = {
   //   recipient: string;
   //   recurring: boolean;
@@ -50,14 +48,16 @@ const EmailForm = (props: Credentials) => {
             </h1>
 
             <>
-              <label
-                className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email">
-                Recipient
-              </label>
+              <div className="flex justify-center mt-12">
+                <label
+                  className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email">
+                  Recipient
+                </label>
+              </div>
               <div className="flex justify-center">
                 <Field
-                  className="  autofill:bg-gray-900 bg-slate-200 dark:bg-gray-900 dark:text-white shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" bg-sky-100 text-white shadow appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   name="username"
                   id="username"
@@ -66,31 +66,12 @@ const EmailForm = (props: Credentials) => {
               </div>
             </>
             {/* Change to a Rich text editor instead */}
-            <label
-              className=" dark:text-white block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="text">
-              Text
-            </label>
-            <Field
-              className=" autofill:bg-gray-900 bg-slate-200 dark:bg-gray-900 dark:text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              name="text"
-              id="text"
-              placeholder="Please enter the text you wish on the email"
-            />
 
-            <div className="flex flex-col mt-5">
-              <button
-                className={`${`rounded-lg dark:bg-slate-950  
-                dark:text-white text-black text-white 
-                 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}`}
-                type="submit">
-                {" "}
-                Done
-              </button>
-              <hr className="mt-6"></hr>
+            <div className="mx-6 bg-green-200 mt-12">
+              <TextEditor></TextEditor>
             </div>
 
+            <div></div>
             {/* .props */}
           </Form>
         )}
