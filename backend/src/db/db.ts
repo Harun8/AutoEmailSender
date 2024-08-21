@@ -9,7 +9,7 @@ dotenv.config();
 
 // or
 export const client = new Client({
-  host: "127.0.0.1",
+  host: "db",
   port: 5432,
   user: "postgres",
   password: process.env.DBPassword,

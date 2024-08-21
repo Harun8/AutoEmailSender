@@ -70,7 +70,11 @@ function HomePage() {
           </div>
 
           <div className="w-full">
-            <ViewIsland loggedIn={loggedIn}></ViewIsland>
+            {loggedIn ? (
+              <ViewIsland loggedIn={loggedIn}></ViewIsland>
+            ) : (
+              <EmailContainer></EmailContainer>
+            )}
           </div>
         </div>
       </>

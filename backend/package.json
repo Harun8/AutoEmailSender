@@ -5,7 +5,8 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec npx ts-node src/app.ts"
+    "start": "nodemon --exec npx ts-node src/app.ts",
+    "migrate-and-start": "npx drizzle-kit generate"
   },
   "keywords": [],
   "author": "",

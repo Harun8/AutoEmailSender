@@ -36,7 +36,7 @@ const dbConnection = async () => {
     console.log("db connected");
 
     const db = drizzle(client);
-    await migrate(db, { migrationsFolder: "../backend/drizzle" });
+    await migrate(db, { migrationsFolder: "/app/drizzle" });
   } catch (error) {
     console.error("Database connection or migration failed:", error);
   } finally {
