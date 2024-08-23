@@ -5,7 +5,7 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qck78ufp
+      POSTGRES_PASSWORD:
       POSTGRES_DB: AutoEmailSender
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -20,13 +20,18 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: postgres
-      DB_PASSWORD: qck78ufp
+      DB_PASSWORD:
       DB_NAME: AutoEmailSender
 
     depends_on:
       - db
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   frontend:
     build: ./frontend
